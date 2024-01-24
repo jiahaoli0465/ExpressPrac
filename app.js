@@ -9,6 +9,22 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
+app.get("/mean", function(req, res) {
+
+    return res.send('test');
+});
+
+app.get("/median", function(req, res) {
+
+    return res.send('test');
+});
+
+app.get("/mode", function(req, res) {
+
+    return res.send('test');
+});
+
+
 
 app.use(function(err, req, res, next) {
     // the default status is 500 Internal Server Error
