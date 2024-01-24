@@ -10,16 +10,31 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.get("/mean", function(req, res) {
+    if (!req.query.nums) {
+        throw new ExpressError('You must pass a query key of nums with a comma-separated list of numbers.', 400)
+    }
+
+    let numsAsStrings = req.query.nums.split(',');
 
     return res.send('test');
 });
 
 app.get("/median", function(req, res) {
+    if (!req.query.nums) {
+        throw new ExpressError('You must pass a query key of nums with a comma-separated list of numbers.', 400)
+    }
+
+    let numsAsStrings = req.query.nums.split(',');
 
     return res.send('test');
 });
 
 app.get("/mode", function(req, res) {
+    if (!req.query.nums) {
+        throw new ExpressError('You must pass a query key of nums with a comma-separated list of numbers.', 400)
+    }
+
+    let numsAsStrings = req.query.nums.split(',');
 
     return res.send('test');
 });
