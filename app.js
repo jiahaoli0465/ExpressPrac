@@ -27,7 +27,12 @@ app.get("/mean", function(req, res) {
     let numsAsStrings = req.query.nums.split(',');
     const nums = numToArray(numsAsStrings);
     const mean = calculateMean(nums);
-    return res.send('mean: ' + mean);
+
+    let response = {
+        'operation': "mean",
+        'value': mean
+    }
+    return res.json(response); 
 });
 
 app.get("/median", function(req, res) {
@@ -38,7 +43,11 @@ app.get("/median", function(req, res) {
     let numsAsStrings = req.query.nums.split(',');
     const nums = numToArray(numsAsStrings);
     const median = calculateMedian(nums);
-    return res.send('median: ' + median);
+    let response = {
+        'operation': "median",
+        'value': median
+    }
+    return res.json(response); 
 });
 
 app.get("/mode", function(req, res) {
@@ -49,7 +58,11 @@ app.get("/mode", function(req, res) {
     let numsAsStrings = req.query.nums.split(',');
     const nums = numToArray(numsAsStrings);
     const mode = calculateMode(nums);
-    return res.send('mode: ' + mode);
+    let response = {
+        'operation': "mode",
+        'value': mode
+    }
+    return res.json(mode); 
 });
 
 app.get("/all", function(req, res) {
