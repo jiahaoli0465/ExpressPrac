@@ -1,5 +1,6 @@
 const express = require('express');
 const ExpressError = require("./expressError")
+const { calculateMean, numToArray, calculateMedian, calculateMode } = require('./helperFunctions')
 
 
 const app = express();
@@ -24,8 +25,9 @@ app.get("/mean", function(req, res) {
     }
 
     let numsAsStrings = req.query.nums.split(',');
-
-    return res.send('test');
+    const nums = numToArray(numsAsStrings);
+    const mean = calculateMean(nums);
+    return res.send('mean: ' + mean);
 });
 
 app.get("/median", function(req, res) {
@@ -34,8 +36,9 @@ app.get("/median", function(req, res) {
     }
 
     let numsAsStrings = req.query.nums.split(',');
-
-    return res.send('test');
+    const nums = numToArray(numsAsStrings);
+    const median = calculateMedian(nums);
+    return res.send('median: ' + median);
 });
 
 app.get("/mode", function(req, res) {
@@ -44,10 +47,28 @@ app.get("/mode", function(req, res) {
     }
 
     let numsAsStrings = req.query.nums.split(',');
-
-    return res.send('test');
+    const nums = numToArray(numsAsStrings);
+    const mode = calculateMode(nums);
+    return res.send('mode: ' + mode);
 });
 
+app.get("/all", function(req, res) {
+    if (!req.query.nums) {
+        throw new ExpressError('You must pass a query key of nums with a comma-separated list of numbers.', 400)
+    }
+
+    let numsAsStrings = req.query.nums.split(',');
+    const nums = numToArray(numsAsStrings);
+    const mean = calculateMean(nums);
+    const median = calculateMedian(nums);
+    const mode = calculateMode(nums);
+    const msg = {
+        'mean': mean,
+        'median': median,
+        'mode':mode
+    }
+    return res.json(msg);
+});
 
 
 app.use(function(err, req, res, next) {
