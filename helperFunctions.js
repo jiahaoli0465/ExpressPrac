@@ -18,6 +18,28 @@ function calculateMedian(nums) {
 
 }
 
+function calculateMode(nums) {
+    let numMap = new Map();
+    let maxCount = 0;
+    let modes = [];
+
+    // Count occurrences
+    nums.forEach(num => {
+        let count = numMap.get(num) || 0;
+        numMap.set(num, count + 1);
+        maxCount = Math.max(maxCount, count + 1);
+    });
+
+    // Find all numbers that match maxCount
+    numMap.forEach((count, num) => {
+        if (count === maxCount) {
+            modes.push(num);
+        }
+    });
+
+    return modes;
+}
+
 function numToArray(arr) {
     // Convert each string in the array to a number
     return arr.map(function(numStr) {
@@ -25,4 +47,4 @@ function numToArray(arr) {
     });
 }
 
-module.exports = { calculateMean, numToArray, calculateMedian };
+module.exports = { calculateMean, numToArray, calculateMedian, calculateMode };
